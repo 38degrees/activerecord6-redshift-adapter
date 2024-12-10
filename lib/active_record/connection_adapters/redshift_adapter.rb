@@ -347,7 +347,9 @@ module ActiveRecord
           @connection.server_version
         end
 
-        def translate_exception(exception, message)
+        # Updated to match changed activerecord method signature
+        # copied https://github.com/kwent/activerecord6-redshift-adapter/blob/master/lib/active_record/connection_adapters/redshift_adapter.rb#L315C1-L326C12
+        def translate_exception(exception, message:, sql:, binds:)
           return exception unless exception.respond_to?(:result)
 
           case exception.message
